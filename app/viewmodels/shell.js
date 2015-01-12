@@ -9,8 +9,26 @@
         activate: function () {
             router.map([
                 { route: '', title:'Home', moduleId: 'viewmodels/home', nav: true },
-                { route: 'activity', title: 'Actividad', moduleId: 'viewmodels/activity', nav: true }
-            ]).buildNavigationModel();
+                { route: 'activity/:id', title: 'Actividad', moduleId: 'viewmodels/activity', nav: true },
+                { route: 'login', title: 'Login Time Tracking', moduleId: 'viewmodels/login', nav: false}
+            ]).mapUnknownRoutes('viewmodels/ivalidRoute', 'invalid')
+              .buildNavigationModel();
+            
+            router.on('router:navigation:cancelled', function(instance, instruction){
+                alert('Se ha cancelado la navegación de la ruta : ' + instruction.fragment);
+            });
+            
+            /**
+             * Sirve para comprobar si una URL es visible o no y por tanto se redirige a otra url
+             * Es muy util para autorizaciones para ver a que URL tenemos acceso o no.
+             * 
+             * @param {type} activador
+             * @param {type} instruction
+             * @returns {String|Boolean}
+             */
+            router.guardRoute = function (activador, instruction){
+                return instruction.fragment.indexOf('activity') === 0 ? 'login' : true;
+            };
             
             return router.activate();
         }
