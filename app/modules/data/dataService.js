@@ -18,6 +18,9 @@ define(function(require){
     return{
         getTimeRecords: function(count){
             return request.get(apiURL + 'TimeRecord/GetAll', {count: count});
+        },
+        setTimeRecord: function(_timeRecord){
+            return request.post(apiURL + "TimeRecord", _timeRecord);
         }
     }
 });

@@ -1,4 +1,8 @@
-﻿define(['plugins/router', 'durandal/app'], function (router, app) {
+﻿define(function (require) {
+    var router = require('plugins/router');
+    var app = require('durandal/app');
+    var bindingHandlers = require('../modules/bindingHandlers');
+
     return {
         router: router,
         search: function() {
@@ -29,7 +33,9 @@
             router.guardRoute = function (activador, instruction){
                 return instruction.fragment.indexOf('activity') === 0 ? 'login' : true;
             };
-            
+
+            bindingHandlers.init();
+
             return router.activate();
         }
     };

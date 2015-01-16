@@ -1,6 +1,25 @@
-<section>
-    <p>Casita Time Tracking!!</p>
+<!--<span data-bind="text: user.name() + ' ' + user.surname()"></span>
+<br>
 
+<span data-bind="text: user.fullname()"></span>-->
+
+<section>
+    <div class="btn-group" data-bind="visible: canStartTracking()">
+        <div class="input-group">
+            <input type="text" class="form-control" data-bind="value: activity"/>
+            <span class="input-group-btn">
+                <button type="button" data-loading-text="Comenzando tarea..." class="btn btn-default" data-bind="'click-loading': startCommand">Start</button>
+            </span>
+        </div>
+    </div>
+    <div data-bind="visible: !canStartTracking()">
+        <div>
+            <h2 data-bind="text: moment.utc( lastRecord().Start ).format('HH:mm:ss')" style="display: inline-block;"></h2>
+            <h3 data-bind="text: lastRecord().Activity"></h3>
+        </div>
+
+        <button class="btn" type="button"  data-loading-text="Finalizando tarea..." data-bind="'click-loading': endCommand">End</button>
+    </div>
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
