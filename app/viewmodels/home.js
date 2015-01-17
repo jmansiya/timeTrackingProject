@@ -3,8 +3,9 @@
  */
 define(function(require){
     var dataServices = require('../modules/data/dataService');
-    var ko = require('knockout');
+    //var ko = require('knockout');
     var app = require('durandal/app');
+    var notifications = require('../modules/notifications');
 
     function setTimeRecord(record){
         record.TimeZoneOffset = new Date().getTimezoneOffset();
@@ -62,6 +63,8 @@ define(function(require){
                 self.lastRecord(timeRecord);
                 self.canStartTracking(false);
                 self.timeRecords().unshift(timeRecord);
+
+                notifications.show('success', 'La actividad ' + timeRecord.Activity + " se ha iniciado correctamente.");
             });
         },
         endCommand: function(){
@@ -76,6 +79,8 @@ define(function(require){
 
                 self.canStartTracking(true);
                 self.activity('');
+
+                notifications.show('success', 'La actividad ' + timeRecord.Activity + ' se ha finalizado correctamente.');
             });
         }
     };

@@ -1,0 +1,12 @@
+<section>
+    <div class="notification" data-bind="template:{
+     foreach: notificationsArr,
+     beforeRemove: beforeRemove,
+     afterAdd: afterAdd
+     }">
+        <div data-bind="css: 'alert alert-' + type">
+            <button type="button"class="close" data-bind="click: $parent.notificationsArr.remove.bind($parent.notificationsArr)">X</button>
+            <span data-bind="text: msg"></span>
+        </div>
+    </div>
+</section>
