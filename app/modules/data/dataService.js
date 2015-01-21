@@ -21,6 +21,10 @@ define(function(require){
     });
 
     return{
+        getTimeRecordSelected: function(id){
+            return request.get(apiURL + "TimeRecord", {id: id}).fail(handlerNotifications);
+        },
+
         getTimeRecords: function(count){
             return request.get(apiURL + 'TimeRecord/GetAll', {count: count}).fail(handlerNotifications);
         },

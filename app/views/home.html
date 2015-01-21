@@ -25,12 +25,20 @@
             <tr>
                 <th>Duración</th>
                 <th>Actividad</th>
+                <th>Localización</th>
+                <th>Detalle</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: timeRecords">
             <tr>
                 <td><span data-bind="text: DurationStr"></span> </td>
                 <td><span data-bind="text: Activity"></span> </td>
+                <td>
+                    <a href="#"> <i class="glyphicon glyphicon-map-marker home-icon"></i> </a>
+                </td>
+                <td>
+                    <a href="#" data-bind="attr: {href:'#activity/' + Id}"> <i class="glyphicon glyphicon-info-sign home-icon"></i> </a>
+                </td>
             </tr>
         </tbody>
 

@@ -30,9 +30,9 @@
              * @param {type} instruction
              * @returns {String|Boolean}
              */
-            router.guardRoute = function (activador, instruction){
-                return instruction.fragment.indexOf('activity') === 0 ? 'login' : true;
-            };
+           // router.guardRoute = function (activador, instruction){
+           //     return instruction.fragment.indexOf('activity') === 0 ? 'login' : true;
+           // };
 
             bindingHandlers.init();
 

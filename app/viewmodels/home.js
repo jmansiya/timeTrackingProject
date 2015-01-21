@@ -13,7 +13,6 @@ define(function(require){
         return dataServices.setTimeRecord(record);
     }
 /*
-
     var user = function(name, surname){
             this.name = ko.observable(name);
             this.surname = ko.observable(surname);
@@ -37,7 +36,6 @@ define(function(require){
 
             return dataServices.getTimeRecords(10).then(function(res){
                 self.timeRecords(res);
-                debugger;
                 if(self.timeRecords().length > 0){
                     var lastRecord = self.timeRecords()[0];
                     self.lastRecord(lastRecord);
