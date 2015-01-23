@@ -1,0 +1,11 @@
+﻿<div class="img-thumbnail map" style="width: 450px">
+    <div data-bind="visible: !mapsAvailable()">
+        <div class="alert">
+            Localization is unavailable
+        </div>
+    </div>
+    <div data-bind="visible: mapsAvailable" style="width: 100%; height: 300px;">
+        <div id="googleMap" style="width: 100%; height: 100%; position: fixed"></div>
+    </div>
+</div>
+

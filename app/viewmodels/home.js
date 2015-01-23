@@ -6,11 +6,34 @@ define(function(require){
     //var ko = require('knockout');
     var app = require('durandal/app');
     var notifications = require('../modules/notifications');
+    var localizacion = require('../modules/geolocalizacion');
+    var localizationDetailModal = require('viewmodels/localizationDetail');
+    var system = require('durandal/system');
+
+
+    var locationServices = new localizacion();
 
     function setTimeRecord(record){
         record.TimeZoneOffset = new Date().getTimezoneOffset();
 
         return dataServices.setTimeRecord(record);
+    }
+
+    function getLocalizacion(){
+        return system.defer(function (dfd){
+            locationServices.getLocation().then(function(position){
+               var loc = {
+                   Latitude: position.coords.latitude,
+                   Longitude: position.coords.longitude,
+                   HorizontalAccuracy: position.coords.accuracy
+               };
+
+               dfd.resolve(loc);
+           }).fail(function(err){
+                notifications.show('warning', 'Could not see the location ' + err);
+                dfd.reject(null);
+            });
+        })
     }
 /*
     var user = function(name, surname){
@@ -57,29 +80,42 @@ define(function(require){
                 return $.Deferred().reject();
             }
 
-            return setTimeRecord(newTimeRecord).then(function(timeRecord){
-                self.lastRecord(timeRecord);
-                self.canStartTracking(false);
-                self.timeRecords().unshift(timeRecord);
+            return getLocalizacion().then(function(loc){
+                newTimeRecord.StartLocalization = loc;
+                return setTimeRecord(newTimeRecord).then(function(timeRecord){
+                    self.lastRecord(timeRecord);
+                    self.canStartTracking(false);
+                    self.timeRecords().unshift(timeRecord);
 
-                notifications.show('success', 'La actividad ' + timeRecord.Activity + " se ha iniciado correctamente.");
+                    notifications.show('success', 'La actividad ' + timeRecord.Activity + " se ha iniciado correctamente.");
+                });
             });
+
+
         },
         endCommand: function(){
             var self = this;
 
-            return setTimeRecord(self.lastRecord).then(function(timeRecord){
-                self.lastRecord(timeRecord);
-                var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id});
-                if(result.length === 1){
-                    self.timeRecords.replace(result[0], timeRecord);
-                }
+            return getLocalizacion().then(function(loc){
+                self.lastRecord().EndLocalization = loc;
+                debugger;
+                return setTimeRecord(self.lastRecord).then(function(timeRecord){
+                    self.lastRecord(timeRecord);
+                    var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id});
+                    if(result.length === 1){
+                        self.timeRecords.replace(result[0], timeRecord);
+                    }
 
-                self.canStartTracking(true);
-                self.activity('');
+                    self.canStartTracking(true);
+                    self.activity('');
 
-                notifications.show('success', 'La actividad ' + timeRecord.Activity + ' se ha finalizado correctamente.');
+                    notifications.show('success', 'La actividad ' + timeRecord.Activity + ' se ha finalizado correctamente.');
+                });
             });
+        },
+
+        showLocalizationDetail: function(timeRecord){
+            localizationDetailModal.show(timeRecord);
         }
     };
 });

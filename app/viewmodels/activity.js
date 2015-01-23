@@ -9,6 +9,8 @@ define(function(require){
         inicio: ko.observable(),
         fin: ko.observable(),
         duracion: ko.observable(),
+        StartLocation: ko.observable(),
+        EndLocation: ko.observable(),
 
         activate: function(id){
             console.log("ID Actividad a mostrar el detalle");
@@ -23,6 +25,11 @@ define(function(require){
                     }
 
                     self.duracion =res.DurationStr;
+
+                    self.StartLocation = res.StartLocalization;
+                    self.EndLocation = res.EndLocalization;
+
+                    debugger;
                 }
             );
         }
