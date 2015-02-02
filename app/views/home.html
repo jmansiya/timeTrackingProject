@@ -4,7 +4,8 @@
 <span data-bind="text: user.fullname()"></span>-->
 
 <section>
-    <div class="btn-group" data-bind="visible: canStartTracking()">
+    <div data-bind="widget: { kind: 'quickStart', lastRecord: lastRecord()}"></div>
+    <!--<div class="btn-group" data-bind="visible: canStartTracking()">
         <div class="input-group">
             <input type="text" class="form-control" data-bind="value: activity"/>
             <span class="input-group-btn">
@@ -19,7 +20,7 @@
         </div>
 
         <button class="btn" type="button"  data-loading-text="Finalizando tarea..." data-bind="'click-loading': endCommand">End</button>
-    </div>
+    </div>-->
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
@@ -31,7 +32,7 @@
         </thead>
         <tbody data-bind="foreach: timeRecords">
             <tr>
-                <td><span data-bind="text: DurationStr"></span> </td>
+                <td><span data-bind="text: IsCompleted ? DurationStr : 'In progress...'"></span> </td>
                 <td><span data-bind="text: Activity"></span> </td>
                 <td>
                     <a href="#" data-bind="click: $parent.showLocalizationDetail"> <i class="glyphicon glyphicon-map-marker home-icon" ></i> </a>

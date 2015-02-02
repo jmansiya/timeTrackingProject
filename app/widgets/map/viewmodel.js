@@ -11,7 +11,6 @@
     };
 
     ctor.prototype.activate = function (settings) {
-        console.log("estoy en el activate del widget MAP");
         this.settings = settings;
         var self = this;
         if (typeof google === 'undefined') {
@@ -30,7 +29,6 @@
                 this.mapsAvailable(false);
         }
     };
-
 
     ctor.prototype.detached = function () {
         $.each(this.markers, function () {

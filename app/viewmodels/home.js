@@ -6,20 +6,17 @@ define(function(require){
     //var ko = require('knockout');
     var app = require('durandal/app');
     var notifications = require('../modules/notifications');
-    var localizacion = require('../modules/geolocalizacion');
     var localizationDetailModal = require('viewmodels/localizationDetail');
-    var system = require('durandal/system');
+    var subscriptionStart, suscriptionEnd;
 
 
-    var locationServices = new localizacion();
-
-    function setTimeRecord(record){
+    /*function setTimeRecord(record){
         record.TimeZoneOffset = new Date().getTimezoneOffset();
 
         return dataServices.setTimeRecord(record);
-    }
+    }*/
 
-    function getLocalizacion(){
+    /*function getLocalizacion(){
         return system.defer(function (dfd){
             locationServices.getLocation().then(function(position){
                var loc = {
@@ -34,7 +31,7 @@ define(function(require){
                 dfd.reject(null);
             });
         })
-    }
+    }*/
 /*
     var user = function(name, surname){
             this.name = ko.observable(name);
@@ -47,15 +44,27 @@ define(function(require){
 
     return {
         timeRecords: ko.observableArray(),
-
+        //estadoTarea: ko.observable(),
         //user: new user("jose", "mansilla"),
-
         activity: ko.observable(),
         lastRecord: ko.observable(),
         canStartTracking: ko.observable(),
 
         activate: function(){
             var self = this;
+
+            subscriptionStart = app.on('timeRecord:changed:start').then(function (timeRecord) {
+                console.log("Time Record :: Recibido :: " + timeRecord.Activity);
+                self.timeRecords.unshift(timeRecord);
+            });
+
+            suscriptionEnd = app.on('timeRecord:changed:end').then(function(timeRecord){
+                console.log("Finalizamos la tarea.  " + timeRecord.Activity);
+                var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id});
+                if(result.length === 1){
+                    self.timeRecords.replace(result[0], timeRecord);
+                }
+            });
 
             return dataServices.getTimeRecords(10).then(function(res){
                 self.timeRecords(res);
@@ -67,7 +76,13 @@ define(function(require){
             });
         },
 
-        startCommand: function(){
+        afterDeactivate: function(){
+            console.log("Cierro conexiones en HOME.js");
+            subscriptionStart.off('timeRecord:changed:start');
+            suscriptionEnd.off('timeRecord:changed:end');
+        },
+
+        /*startCommand: function(){
             var newTimeRecord = {
                     IsCompleted: false,
                     Activity: this.activity()
@@ -112,7 +127,7 @@ define(function(require){
                     notifications.show('success', 'La actividad ' + timeRecord.Activity + ' se ha finalizado correctamente.');
                 });
             });
-        },
+        },*/
 
         showLocalizationDetail: function(timeRecord){
             localizationDetailModal.show(timeRecord);

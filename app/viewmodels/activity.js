@@ -33,8 +33,8 @@ define(function(require){
                 }
             );
         }
-       
-       //canActivate: function(){
+
+        //canActivate: function(){
        //    console.log("No se puede navegar a a esta web está en construcción.");
        //    return false;
        //}
