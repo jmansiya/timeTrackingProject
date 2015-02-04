@@ -1,11 +1,11 @@
 ﻿<div id="mainChronometer" class="row actionRegion">
     <div class="container">
-        <div class="col-xs-5 col-md-3">
-            <span id="timeNumbers" data-bind="text: timeElapsed, visible: !canStartTracking()"></span>
-        </div>
-        <div class="col-xs-12 col-md-9">
+        <div >
+<!--        </div>
+        <div class="col-xs-12 col-md-9"> -->
             <form class="input-group" style="margin-top: 19px;">
-                <input type="text" class="form-control" data-bind="value: activity, disable: !canStartTracking(), hasfocus: canStartTracking()"/>
+                <input type="text" style="width: 10%;" class="form-control" data-bind="value: timeElapsed(), visible: !canStartTracking()" disabled="disabled"/>
+                <input type="text" class="form-control" data-bind="value: activity, disable: !canStartTracking(), style:{width: (!canStartTracking() ? '90%' : '100%')}, hasfocus: canStartTracking()"/>
                 <span class="input-group-btn">
                     <button type="submit" data-loading-text="Comenzando tarea..." class="btn btn-default" data-bind="'click-loading': startCommand, visible: canStartTracking()">Start</button>
                     <button type="submit" data-loading-text="Finalizando tarea..." class="btn btn-default" data-bind="'click-loading': endCommand, visible: !canStartTracking()">finalizar</button>

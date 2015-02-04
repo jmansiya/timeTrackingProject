@@ -22,20 +22,15 @@
     };
 
     ctor.prototype.activate = function (settings) {
-        /*this.canStartTracking(settings.options[0]);
-        this.lastRecord(settings.options[1]);*/
-        var self = this;
-
         if (settings.lastRecord && !settings.lastRecord.IsCompleted) {
             this.lastRecord(settings.lastRecord);
-            this.timeElapsed(settings.lastRecord.DurationStr);
+            this.timeElapsed(this.lastRecord().DurationStr);
             this.canStartTracking(false);
             this.setElapsedTimer();
-            this.activity(this.lastRecord.Activity);
+            this.activity(this.lastRecord().Activity);
         } else {
             this.initialize();
         }
-
 
         /* this.chronometro = setInterval(function(){
 
@@ -113,9 +108,9 @@
 
     ctor.prototype.setElapsedTimer = function () {
         var self = this;
-        var start = moment(this.lastRecord.StartUtc, "YYYY-MM-DD HH:mm:ss");
+        var start = moment(this.lastRecord().StartUtc, "YYYY-MM-DD HH:mm:ss");
         var addZeroFn = function (num) { return ('0' + num).slice(-2); };
-        this.duration(this.lastRecord.Duration);
+        this.duration(this.lastRecord().Duration);
         this.duration.subscribe(function (duration) {
             var diff = moment(start).add('s', duration).diff(start);
             var momentDuration = moment.duration(diff);

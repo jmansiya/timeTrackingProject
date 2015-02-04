@@ -29,12 +29,11 @@ define(function(require){
                     self.StartLocation = res.StartLocalization;
                     self.EndLocation = res.EndLocalization;
 
-                    debugger;
                 }
             );
         }
 
-        //canActivate: function(){
+       //canActivate: function(){
        //    console.log("No se puede navegar a a esta web está en construcción.");
        //    return false;
        //}

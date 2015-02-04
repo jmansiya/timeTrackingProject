@@ -1,0 +1,35 @@
+﻿<div data-bind="with: info">
+    <h2 data-bind="text: groupTitle" style="border-bottom: solid 1px rgb(204, 204, 204);"></h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <div data-bind="visible: records().length == 0">
+                <div class="alert">
+                    No information available.
+                </div>
+            </div>
+            <div data-bind="visible: records().length > 0">
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th data-bind="text: $parent.title"></th>
+                            <th data-bind="text: $parent.unit"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: records">
+                        <tr>
+                            <td class="col-xs-6 col-sm-6 col-md-4"><span data-bind="text: $parent.translateRelativeId(RelativeId, Group)"></span></td>
+                            <td class="col-xs-6 col-sm-6 col-md-4"><span data-bind="text: Duration "></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-4">
+            <canvas data-bind="'pie-chart': chartData() "></canvas>
+            <p style="text-align: center">
+                <span>Worked <strong data-bind="text: sum() + ' ' + unit()"></strong> of <strong data-bind="text: total() + ' ' + unit()"></strong></span>
+            </p>
+        </div>
+    </div>
+</div>
