@@ -1,1 +1,6 @@
-<p>Estadísticas vas aquí</p>
+<div id="stadisticsView">
+    <article class="container" data-bind="foreach: groups">
+        <div data-bind="widget: {kind: 'groupedActivity', info: $data }">
+        </div>
+    </article>
+</div>

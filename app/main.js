@@ -6,7 +6,8 @@
         'transitions' : '../scripts/lib/durandal/js/transitions',
         'knockout': '../scripts/lib/knockout/knockout-3.1.0',
         'bootstrap': '../scripts/lib/bootstrap/js/bootstrap',
-        'jquery': '../scripts/lib/jquery/jquery-1.9.1'
+        'jquery': '../scripts/lib/jquery/jquery-1.9.1',
+        'chart': '../scripts/lib/chart'
     },
     shim: {
         'bootstrap': {

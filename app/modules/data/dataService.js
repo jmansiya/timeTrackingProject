@@ -30,6 +30,10 @@ define(function(require){
         },
         setTimeRecord: function(_timeRecord){
             return request.post(apiURL + "TimeRecord", _timeRecord).fail(handlerNotifications);
+        },
+
+        getGroupedActivity: function (groupType, year, filter) {
+            return request.get(apiURL + 'statistics', { groupType: groupType, year: year, filter: filter }).fail(handlerNotifications);
         }
-    }
+    };
 });

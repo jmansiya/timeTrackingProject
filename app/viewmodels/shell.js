@@ -14,6 +14,7 @@
             router.map([
                 { route: '', title:'Home', moduleId: 'viewmodels/home', nav: true },
                 { route: 'activity/:id', title: 'Actividad', moduleId: 'viewmodels/activity', nav: true },
+                { route: 'estadisticas', title: 'Estadísticas', moduleId: 'viewmodels/estadisticas', nav: true },
                 { route: 'login', title: 'Login Time Tracking', moduleId: 'viewmodels/login', nav: false}
             ]).mapUnknownRoutes('viewmodels/ivalidRoute', 'invalid')
               .buildNavigationModel();
