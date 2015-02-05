@@ -2,9 +2,10 @@
  * Created by Jose Mansilla on 16/01/15.
  */
 
-define(function(require){
-    var composition = require('durandal/composition');
-    require('bootstrap');/*En el curso no requiere de que se carge bootstrap aquí no sé por qué pero sin esto no funciona
+define(['durandal/composition', 'chart'], function(composition){
+   // var composition = require('durandal/composition');
+   // require('bootstrap');
+   /*En el curso no requiere de que se carge bootstrap aquí no sé por qué pero sin esto no funciona
     la función $().button('loading')*/
 
     var bindingHandlers = {
@@ -20,7 +21,16 @@ define(function(require){
                         });
                     });
                 }
-            })
+            });
+            
+             composition.addBindingHandler('pie-chart', {
+                init: function (element, valueAccessor) {
+                   // debugger;
+                    var ctx = element.getContext("2d");
+                    var data = valueAccessor();
+                    new Chart(ctx).Pie(data);
+                }
+            });
         }
     };
 

@@ -13,6 +13,7 @@ define(function () {
     };
 
     var ctor = function (records, total, columnTitle, unit, groupTitle) {
+        debugger;
         this.records = ko.observableArray(records);
         this.sum = ko.observable(sumDuration(records));
         this.total = ko.observable(total);
@@ -27,7 +28,7 @@ define(function () {
             return moment().weekday(relativeId).format("dddd");
         if (groupType == 2)
             return moment().months(relativeId - 1).format("MMMM");
-        return relativeId;
+        return "Week: " + relativeId;
     };
 
     return ctor;
