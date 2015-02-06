@@ -1,20 +1,20 @@
-﻿requirejs.config({
+requirejs.config({
     paths: {
         'text': '../scripts/lib/require/text',
         'durandal':'../scripts/lib/durandal/js',
         'plugins' : '../scripts/lib/durandal/js/plugins',
         'transitions' : '../scripts/lib/durandal/js/transitions',
-        'knockout': '../scripts/lib/knockout/knockout-3.1.0',
-        'bootstrap': '../scripts/lib/bootstrap/js/bootstrap',
-        'jquery': '../scripts/lib/jquery/jquery-1.9.1',
+       // 'knockout': '../scripts/lib/knockout/knockout-3.1.0',
+       // 'bootstrap': '../scripts/lib/bootstrap/js/bootstrap',
+       // 'jquery': '../scripts/lib/jquery/jquery-1.9.1',
         'chart': '../scripts/lib/chart'
-    },
-    shim: {
-        'bootstrap': {
-            deps: ['jquery'],
-            exports: 'jQuery'
-       }
-    }
+    }//,
+    //shim: {
+    //    'bootstrap': {
+    //        deps: ['jquery'],
+    //        exports: 'jQuery'
+    //   }
+    //}
 });
 
 define('jquery', [], function () { return jQuery; });
@@ -22,7 +22,7 @@ define('knockout', [], function () { return ko; });
 
 define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (system, app, viewLocator) {
     //>>excludeStart("build", true);
-    system.debug(true);
+    system.debug(true);    
 
     //>>excludeEnd("build");
 

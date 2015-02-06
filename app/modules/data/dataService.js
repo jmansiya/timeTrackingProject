@@ -4,14 +4,16 @@
 
 define(function(require){
     var request = require('plugins/http');
-    var notifications = require('../notifications');
-
+ 
     var apiURL = 'http://localhost:9000/api/';
 
     //Configuramos la autenticación básica para llamar a nuestra API
 
-    var handlerNotifications = function(req){
-       notifications.show('danger', 'Se ha producido un error ' + req.responseText, true)
+    var errorHandlers = [];
+    var handlerNotifications = function(error){
+        $.each(errorHandlers, function(){
+            this(error);
+        });      
     };
 
     $.ajaxSetup({
@@ -21,6 +23,10 @@ define(function(require){
     });
 
     return{
+        setErrorHandlers: function(errorHandlerCallback){
+            errorHandlers.push(errorHandlerCallback);
+        },
+        
         getTimeRecordSelected: function(id){
             return request.get(apiURL + "TimeRecord", {id: id}).fail(handlerNotifications);
         },
@@ -34,6 +40,10 @@ define(function(require){
 
         getGroupedActivity: function (groupType, year, filter) {
             return request.get(apiURL + 'statistics', { groupType: groupType, year: year, filter: filter }).fail(handlerNotifications);
+        },
+        
+        setError: function(error){
+            return request.post(apiURL + 'error', error);
         }
     };
 });

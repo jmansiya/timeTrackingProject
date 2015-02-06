@@ -54,12 +54,10 @@ define(function(require){
             var self = this;
 
             subscriptionStart = app.on('timeRecord:changed:start').then(function (timeRecord) {
-                console.log("Time Record :: Recibido :: " + timeRecord.Activity);
                 self.timeRecords.unshift(timeRecord);
             });
 
             suscriptionEnd = app.on('timeRecord:changed:end').then(function(timeRecord){
-                console.log("Finalizamos la tarea.  " + timeRecord.Activity);
                 var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id});
                 if(result.length === 1){
                     self.timeRecords.replace(result[0], timeRecord);
@@ -77,7 +75,6 @@ define(function(require){
         },
 
         afterDeactivate: function(){
-            console.log("Cierro conexiones en HOME.js");
             subscriptionStart.off('timeRecord:changed:start');
             suscriptionEnd.off('timeRecord:changed:end');
         },

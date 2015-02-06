@@ -11,7 +11,6 @@ define(function (require) {
         activate: function () {
             var self = this;
             var date = moment();
-            debugger;
             this.groups.removeAll();
             return $.when(dataService.getGroupedActivity(0, date.year(), date.isoWeek()),
                     dataService.getGroupedActivity(1, date.year(), date.month() + 1),

@@ -13,7 +13,6 @@ define(function () {
     };
 
     var ctor = function (records, total, columnTitle, unit, groupTitle) {
-        debugger;
         this.records = ko.observableArray(records);
         this.sum = ko.observable(sumDuration(records));
         this.total = ko.observable(total);

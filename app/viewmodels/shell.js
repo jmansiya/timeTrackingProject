@@ -1,7 +1,9 @@
-﻿define(function (require) {
+define(function (require) {
     var router = require('plugins/router');
     var app = require('durandal/app');
     var bindingHandlers = require('../modules/bindingHandlers');
+    var errorHandlers = require('../modules/errorHandler');
+    
 
     return {
         router: router,
@@ -13,15 +15,15 @@
         activate: function () {
             router.map([
                 { route: '', title:'Home', moduleId: 'viewmodels/home', nav: true },
-                { route: 'activity/:id', title: 'Actividad', moduleId: 'viewmodels/activity', nav: true },
+                { route: 'activity/:id', title: 'Actividad', moduleId: 'viewmodels/activity', nav: false},
                 { route: 'estadisticas', title: 'Estadísticas', moduleId: 'viewmodels/estadisticas', nav: true },
                 { route: 'login', title: 'Login Time Tracking', moduleId: 'viewmodels/login', nav: false}
             ]).mapUnknownRoutes('viewmodels/ivalidRoute', 'invalid')
               .buildNavigationModel();
             
-            router.on('router:navigation:cancelled', function(instance, instruction){
-                alert('Se ha cancelado la navegación de la ruta : ' + instruction.fragment);
-            });
+          //  router.on('router:navigation:cancelled', function(instance, instruction){
+                //alert('Se ha cancelado la navegación de la ruta : ' + instruction.fragment);
+          //  });
             
             /**
              * Sirve para comprobar si una URL es visible o no y por tanto se redirige a otra url
@@ -36,6 +38,7 @@
            // };
 
             bindingHandlers.init();
+            errorHandlers.init();
 
             return router.activate();
         }

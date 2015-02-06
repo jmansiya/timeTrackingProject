@@ -1,4 +1,4 @@
-﻿define(function (require) {
+define(function (require) {
     var localizacion = require('../../modules/geolocalizacion');
     var locationServices = new localizacion();
     var system = require('durandal/system');
