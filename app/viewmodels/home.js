@@ -5,7 +5,6 @@ define(function(require){
     var dataServices = require('../modules/data/dataService');
     //var ko = require('knockout');
     var app = require('durandal/app');
-    var notifications = require('../modules/notifications');
     var localizationDetailModal = require('viewmodels/localizationDetail');
     var subscriptionStart, suscriptionEnd;
 

@@ -1,4 +1,5 @@
 ﻿<div>
+    <!-- ko if:context.isAuthenticated() == true -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -24,6 +25,9 @@
                 <li class="loader" data-bind="css: { active: router.isNavigating }">
                     <i class="fa fa-spinner fa-spin fa-2x"></i>
                 </li>
+                <li>
+                    <a href="#" data-bind="click: authentication.logOff">Log Off</a>
+                </li>
             </ul>
 
             <!--<form class="navbar-form navbar-right" role="search" data-bind="submit:search">
@@ -33,7 +37,8 @@
             </form>-->
         </div>
     </nav>
-
+    <!-- /ko -->
+    
     <!-- data-bind="router: { transition:'entrance' }" -->
     <div class="page-host">
         <div id="notificationsView" data-bind="compose : {view:'views/notifications.html', model: 'modules/notifications' }"></div>

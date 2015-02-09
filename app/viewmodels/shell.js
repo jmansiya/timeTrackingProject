@@ -3,10 +3,13 @@ define(function (require) {
     var app = require('durandal/app');
     var bindingHandlers = require('../modules/bindingHandlers');
     var errorHandlers = require('../modules/errorHandler');
-    
+    var authentication = require('../modules/authentication');
+    var context = require('../modules/context');
 
     return {
         router: router,
+        context: context,
+        authentication: authentication,
         search: function() {
             //It's really easy to show a message box.
             //You can add custom options too. Also, it returns a promise for the user's response.
@@ -39,6 +42,7 @@ define(function (require) {
 
             bindingHandlers.init();
             errorHandlers.init();
+            authentication.init();          
 
             return router.activate();
         }

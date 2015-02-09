@@ -16,11 +16,6 @@ define(function(require){
         });      
     };
 
-    $.ajaxSetup({
-        beforeSend: function(req){
-            req.setRequestHeader('Authorization', 'Basic dXNlcjp1c2Vy');
-        }
-    });
 
     return{
         setErrorHandlers: function(errorHandlerCallback){
@@ -44,6 +39,14 @@ define(function(require){
         
         setError: function(error){
             return request.post(apiURL + 'error', error);
+        },
+        
+        authenticate: function(){
+            return request.get(apiURL + 'authenticate');
+        },
+        
+        getUser: function(){
+            return request.get(apiURL + 'user');
         }
     };
 });

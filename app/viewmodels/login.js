@@ -6,7 +6,7 @@
 define(function(require){
    var auth = require('../modules/authentication');
    var notifications = require('../modules/notifications');
-   var route = require('plugins/router');
+   var router = require('plugins/router');
    
    var ctor = function(){
        this.username = ko.observable(),
@@ -24,9 +24,13 @@ define(function(require){
        var self = this;
        
        return auth.login(this.username(), this.password(), this.rememberMe()).then(function(){
-           router.navigate(self.redirecURL, true);
+           notifications.deleteNotifications();
+           router.navigate(self.redirecURL(), true);
        }).fail(function(){
            notifications.show('danger', 'Ops... The current username and password are not correct', true);
+           self.username('');
+           self.password('');
+           self.rememberMe('');
        });
    };
    

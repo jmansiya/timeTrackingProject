@@ -26,7 +26,7 @@ define(function(require){
                console.log("ERRORR  obtenido.!");
                console.log(req);
                notifications.show('danger', msg, true);
-           })
+           });
        }
    };
    

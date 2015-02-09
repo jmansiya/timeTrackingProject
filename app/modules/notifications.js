@@ -29,7 +29,11 @@ define(function(require){
         beforeRemove: function(element){
             if (element.nodeType === 1) $(element).slideUp(function(){
                 $(element).remove();
-            })
+            });
+        },
+        
+        deleteNotifications: function(){
+          this.notificationsArr([]);  
         }
     };
 
