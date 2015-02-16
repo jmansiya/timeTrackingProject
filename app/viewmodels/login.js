@@ -7,6 +7,7 @@ define(function(require){
    var auth = require('../modules/authentication');
    var notifications = require('../modules/notifications');
    var router = require('plugins/router');
+   var SignUp = require('viewmodels/signUp');
    
    var ctor = function(){
        this.username = ko.observable(),
@@ -19,6 +20,21 @@ define(function(require){
            return true;
        };
    };
+  
+   ctor.prototype.signUp = function(){
+       SignUp.show().then(function(user){
+           if(user){
+               auth.login(user.Username, user.Password, false).then(function(){
+                    router.navigate('', true);
+                }).fail(function(){
+                    notifications.show('danger', 'Ops... Se ha producido un error al crear al nuevo usuario', true);
+                    self.username('');
+                    self.password('');
+                    self.rememberMe('');
+                });
+           }
+       });
+   }; 
    
    ctor.prototype.login = function(){
        var self = this;

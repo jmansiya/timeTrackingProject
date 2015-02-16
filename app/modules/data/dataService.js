@@ -47,6 +47,10 @@ define(function(require){
         
         getUser: function(){
             return request.get(apiURL + 'user');
+        },
+        
+        createUser: function (user) {
+            return request.post(apiURL + 'user', user).fail(handlerNotifications);
         }
     };
 });

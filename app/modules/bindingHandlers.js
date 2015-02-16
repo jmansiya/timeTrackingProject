@@ -31,6 +31,21 @@ define(['durandal/composition', 'chart'], function(composition){
                     new Chart(ctx).Pie(data);
                 }
             });
+            
+            composition.addBindingHandler('validate',{
+                update: function(element, valueAccessor){
+                    var data = valueAccessor();
+                    
+                    $(element).removeClass('has-success');
+                    $(element).removeClass('has-error');
+                    
+                    if(data.isModified() && data.isValid()){
+                        $(element).addClass('has-success');    
+                    } else if (data.isModified() && !data.isValid()){
+                        $(element).addClass('has-error');    
+                    }
+                }
+            });
         }
     };
 

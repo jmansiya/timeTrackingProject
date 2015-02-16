@@ -20,7 +20,7 @@ define(function(require){
                if(req.responseText){
                    var errorInfo = $.parseJSON(req.responseText);
                    if(errorInfo.Message){
-                       msg += " Error " + errorInfo.Message;
+                       msg = "Error " + errorInfo.Message;
                    }
                }
                console.log("ERRORR  obtenido.!");

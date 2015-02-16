@@ -5,6 +5,8 @@ define(function (require) {
     var errorHandlers = require('../modules/errorHandler');
     var authentication = require('../modules/authentication');
     var context = require('../modules/context');
+    var validation = require('../modules/validations');
+    
 
     return {
         router: router,
@@ -42,7 +44,8 @@ define(function (require) {
 
             bindingHandlers.init();
             errorHandlers.init();
-            authentication.init();          
+            authentication.init();  
+            validation.init();
 
             return router.activate();
         }
