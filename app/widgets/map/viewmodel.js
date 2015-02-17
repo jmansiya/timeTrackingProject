@@ -25,7 +25,7 @@
                         visible: true
                     }));
             });
-            if (this.markers.length == 0)
+            if (this.markers.length === 0)
                 this.mapsAvailable(false);
         }
     };

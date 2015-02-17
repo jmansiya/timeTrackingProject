@@ -17,5 +17,5 @@ define(function(){
                 ko.validation.registerExtenders();
                 ko.validation.init({ insertMessages: true });
             }
-        }
+        };
 });

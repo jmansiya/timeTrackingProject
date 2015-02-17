@@ -57,7 +57,7 @@ define(function(require){
             });
 
             suscriptionEnd = app.on('timeRecord:changed:end').then(function(timeRecord){
-                var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id});
+                var result = $.grep(self.timeRecords(), function(r){ return r.Id === timeRecord.Id;});
                 if(result.length === 1){
                     self.timeRecords.replace(result[0], timeRecord);
                 }

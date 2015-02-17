@@ -144,7 +144,7 @@ define(function (require) {
                     notifications.show('warning', 'Could not see the location ' + err);
                     dfd.reject(null);
                 });
-        })
+        });
     }
 
     return ctor;

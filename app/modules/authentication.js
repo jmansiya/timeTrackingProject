@@ -68,7 +68,7 @@ define(function(require){
             var self = this;
             
             var isLogin = function(fragment){
-                return fragment.indexOf('login') > -1
+                return fragment.indexOf('login') > -1;
             };
             
             var handlerUnAuthorized = function(){
